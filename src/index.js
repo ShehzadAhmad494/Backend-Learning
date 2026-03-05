@@ -1,28 +1,19 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import { DB_NAME } from "./constants.js";
+import dotenv from "dotenv"
 import connectDB from "./db/connection.js";
+import app from "./app.js"
 
-dotenv.config({ path: "../.env" });
+// Main Headache ???
+dotenv.config({
+    path: "../.env"
+})
 
-const app = express();
-
-connectDB();
-// This is poluting over index.js so we use db (connection.js for this connection)
-/*
-(async () => {
-  try {
-
-    console.log("Mongo URL:", process.env.MONGODB_URL);
-
-    await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`);
-
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on http://localhost:${process.env.PORT}`);
-    });
-
-  } catch (error) {
-    console.log("MongoDB Connection Error:", error);
-  }
-})(); */
+// as this is async (Promises) it gives .then and .catch
+connectDB()
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is Listening on localhost:${process.env.PORT}`);
+    })
+})
+.catch((error) => {
+    console.log("Database Connection Failed: ", error)
+})
