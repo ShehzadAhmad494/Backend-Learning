@@ -1,0 +1,2 @@
+// why ......?
+export const DB_NAME = "Backend Learning"
