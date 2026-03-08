@@ -2,10 +2,10 @@ import express from "express"
 import cors from "cors"
 
 // cookies from the user browser (accrss,set) from my server
-import cookieParser from "cookie-parser"
+// import cookieParser from "cookie-parser"
 
 
-const app = express()
+const app = express();
 
 
 // middleware configuration 
@@ -28,6 +28,6 @@ app.use(express.urlencoded({
 app.use(express.static("public"))
 
 
-app.use(express.cookieParser())
+// app.use(express.cookieParser())
 
 export default app
